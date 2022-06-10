@@ -147,6 +147,6 @@ RSpec.describe 'Merchant Dashboard Index', type: :feature do
     expect(page).to have_link("#{@merchant.name}'s Discounts")
     click_link "#{@merchant.name}'s Discounts"
 
-    expect(current_path).to eq(merchant_bulk_discounts(@merchant))
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
   end
 end
