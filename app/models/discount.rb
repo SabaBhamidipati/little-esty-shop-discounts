@@ -1,2 +1,0 @@
-class Discount < ApplicationRecord
-end

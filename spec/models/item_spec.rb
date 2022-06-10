@@ -3,8 +3,9 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   describe 'relationships' do
     it { should belong_to(:merchant) }
+    it { should have_many(:bulk_discounts).through(:merchant) }
     it { should have_many(:invoice_items) }
-    it { should have_many(:invoices).through(:invoice_items) } 
+    it { should have_many(:invoices).through(:invoice_items) }
   end
 
   describe 'validations' do
@@ -20,7 +21,7 @@ RSpec.describe Item, type: :model do
     expect(item_1.unit_price_to_dollars).to eq('15.00')
   end
 
-  it 'shows top five popular items' do 
+  it 'shows top five popular items' do
     merchant = Merchant.create!(name: 'Brylan')
     customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
     invoice_1 = customer_1.invoices.create!(status: 'completed',
@@ -54,7 +55,7 @@ RSpec.describe Item, type: :model do
     expect(Item.most_popular_items).to eq([item_5, item_7, item_4, item_6, item_3])
   end
 
-  it 'shows item total revenue' do 
+  it 'shows item total revenue' do
     merchant = Merchant.create!(name: 'Brylan')
     customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
     invoice_1 = customer_1.invoices.create!(status: 'completed',
@@ -88,7 +89,7 @@ RSpec.describe Item, type: :model do
     expect(item_7.total_item_revenue).to eq("40.00")
   end
 
-  it 'shows best day for top item' do 
+  it 'shows best day for top item' do
     merchant = Merchant.create!(name: 'Brylan')
     customer_1 = Customer.create!(first_name: 'Joey', last_name: 'Ondricka')
     invoice_1 = customer_1.invoices.create!(status: 'completed',

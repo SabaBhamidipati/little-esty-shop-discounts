@@ -1,8 +1,9 @@
-class Item < ApplicationRecord 
+class Item < ApplicationRecord
 
   enum status: { 'Enabled' => 0, 'Disabled' => 1 }
 
   belongs_to :merchant
+  has_many :bulk_discounts, through: :merchant
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
   validates_presence_of :name
@@ -24,7 +25,7 @@ class Item < ApplicationRecord
 
   def total_item_revenue
     invoice_items.sum("quantity * unit_price").to_s.rjust(3, "0").insert(-3, ".")
-  end 
+  end
 
   def best_day
     invoices
