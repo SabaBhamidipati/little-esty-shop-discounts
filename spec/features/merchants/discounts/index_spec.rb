@@ -10,27 +10,30 @@ RSpec.describe 'Bulk Discount Index', type: :feature do
   end
 
   it 'should display discounts for merchant including percentage and threshold' do
+    visit (merchant_bulk_discounts_path(@merchant_2))
+    expect(page).to_not have_content("Percentage")
+    expect(page).to_not have_content("Threshold")
+
     visit (merchant_bulk_discounts_path(@merchant))
-# save_and_open_page
     expect(page).to have_content("#{@merchant.name}'s Discounts")
     expect(page).to_not have_content("#{@merchant_2.name}'s Discounts")
 
     within "#id-#{@discount_20.id}" do
       expect(page).to have_content("Percentage: 20%")
       expect(page).to have_content("Threshold: 10 items")
-      expect(page).to have_link(merchant_bulk_discount_path(@merchant, @discount_20))
+      expect(page).to have_link("Percentage: #{@discount_20.percentage}")
     end
 
     within "#id-#{@discount_10.id}" do
       expect(page).to have_content("Percentage: 10%")
       expect(page).to have_content("Threshold: 5 items")
-      expect(page).to have_link(merchant_bulk_discount_path(@merchant, @discount_10))
+      expect(page).to have_link("Percentage: #{@discount_10.percentage}")
     end
 
     within "#id-#{@discount_30.id}" do
       expect(page).to have_content("Percentage: 30%")
       expect(page).to have_content("Threshold: 15 items")
-      expect(page).to have_link(merchant_bulk_discount_path(@merchant, @discount_30))
+      expect(page).to have_link("Percentage: #{@discount_30.percentage}")
     end
   end
 
