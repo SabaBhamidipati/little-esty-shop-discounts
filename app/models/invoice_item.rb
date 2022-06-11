@@ -13,6 +13,14 @@ class InvoiceItem < ApplicationRecord
   end
 
   def discounted_revenue
-    
+    if highest_qualified_discount
+    (quantity * unit_price) * (1 - (highest_qualified_discount.percentage / 100.0))
+    else
+    (quantity * unit_price)
+    end
+  end
+
+  def highest_qualified_discount
+    bulk_discounts.where("threshold <= #{self.quantity}").order(percentage: :desc).first
   end
 end

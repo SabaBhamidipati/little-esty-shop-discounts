@@ -99,10 +99,12 @@ RSpec.describe 'Merchant Invoice Show page' do
   it 'can display discounted revenue' do
     visit merchant_invoice_path(@merchant, @invoice_7)
 
-    expect(page).to have_content("Discount Revenue: $1500.00")
+    expect(page).to have_content("Discounted Revenue: $15.0")
   end
 
-  xit 'does not display discounted revenue if no discounts applied' do
+  it 'does not display discounted revenue if no discounts applied' do
+    visit merchant_invoice_path(@merchant, @invoice_1)
 
+    expect(page).to_not have_content("Discounted Revenue")
   end
 end

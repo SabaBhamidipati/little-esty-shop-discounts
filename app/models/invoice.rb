@@ -23,6 +23,6 @@ class Invoice < ApplicationRecord
   end
 
   def total_discounted_revenue
-    invoice_items.sum { |ii| ii.discounted_revenue }
+    invoice_items.sum { |ii| ii.discounted_revenue } / 100.0
   end
 end
