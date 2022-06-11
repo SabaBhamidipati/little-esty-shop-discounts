@@ -136,9 +136,17 @@ RSpec.describe 'Merchant Dashboard Index', type: :feature do
     end
   end
 
-  it 'has repo name from gitgub', :vcr do
+  xit 'has repo name from gitgub', :vcr do
     visit merchant_dashboard_index_path(@merchant.id)
 
     expect(page).to have_content('Little Esty Shop')
+  end
+
+  it 'has a link to all my discounts' do
+    visit merchant_dashboard_index_path(@merchant.id)
+    expect(page).to have_link("Discounts")
+    click_link "Discounts"
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
   end
 end
