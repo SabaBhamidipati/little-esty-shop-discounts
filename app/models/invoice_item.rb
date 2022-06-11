@@ -11,4 +11,8 @@ class InvoiceItem < ApplicationRecord
     where(status: %w[pending packaged])
       .order(:created_at)
   end
+
+  def discounted_revenue
+    
+  end
 end

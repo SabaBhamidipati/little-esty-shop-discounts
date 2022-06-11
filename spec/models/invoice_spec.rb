@@ -104,7 +104,7 @@ RSpec.describe Invoice, type: :model do
                                                     created_at: Time.parse('2012-03-28 14:54:09 UTC'))
       @discount_20 = BulkDiscount.create!(percentage: 20, threshold: 5, merchant_id: @merchant.id)
 
-    expect(@invoice_7.discounted_revenue).to eq(1500)
+    expect(@invoice_7.total_discounted_revenue).to eq(1500)
     end
   end
 end

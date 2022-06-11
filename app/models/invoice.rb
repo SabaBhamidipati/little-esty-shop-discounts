@@ -21,4 +21,8 @@ class Invoice < ApplicationRecord
       .order(best_day: :desc)
       .first
   end
+
+  def total_discounted_revenue
+    invoice_items.sum { |ii| ii.discounted_revenue }
+  end
 end
