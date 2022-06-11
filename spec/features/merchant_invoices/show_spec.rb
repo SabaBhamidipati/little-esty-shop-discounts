@@ -17,7 +17,8 @@ RSpec.describe 'Merchant Invoice Show page' do
     @invoice_item_2 = @item_2.invoice_items.create!(invoice_id: @invoice_7.id, quantity: 5, unit_price: 375, status: 'pending',
                                                     created_at: Time.parse('2012-03-28 14:54:09 UTC'))
     @invoice_item_3 = @item_2.invoice_items.create!(invoice_id: @invoice_1.id, quantity: 1, unit_price: 375, status: 'shipped',
-                                                    created_at: Time.parse('2012-03-28 14:54:09 UTC'))
+                                                  created_at: Time.parse('2012-03-28 14:54:09 UTC'))
+    @discount_20 = BulkDiscount.create!(percentage: 20, threshold: 5, merchant_id: @merchant.id)
   end
 
   it 'displays the invoice information in the show page', :vcr do
@@ -93,5 +94,17 @@ RSpec.describe 'Merchant Invoice Show page' do
     within "#invoice-items-#{@invoice_item_3.id}" do
       expect(page).to have_content('packaged')
     end
+  end
+
+  it 'can display discounted revenue' do
+    visit merchant_invoice_path(@merchant, @invoice_7)
+
+    expect(page).to have_content("Discounted Revenue: $15.0")
+  end
+
+  it 'does not display discounted revenue if no discounts applied' do
+    visit merchant_invoice_path(@merchant, @invoice_1)
+
+    expect(page).to_not have_content("Discounted Revenue")
   end
 end
