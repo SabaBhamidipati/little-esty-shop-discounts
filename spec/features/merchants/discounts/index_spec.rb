@@ -57,12 +57,12 @@ RSpec.describe 'Bulk Discount Index', type: :feature do
     within "#id-#{@discount_10.id}" do
       expect(page).to have_content("Percentage: 10%")
       expect(page).to have_content("Threshold: 5 items")
-      click_link("Remove: #{@discount_10.id}")
-
-      expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
-      expect(page).to_not have_content("Percentage: 10%")
-      expect(page).to_not have_content("Threshold: 5 items")
+      click_link "Remove: #{@discount_10.id}"
     end
+
+    expect(current_path).to eq(merchant_bulk_discounts_path(@merchant))
+    expect(page).to_not have_content("Percentage: 10%")
+    expect(page).to_not have_content("Threshold: 5 items")
 
     expect(page).to have_content("Percentage: 20%")
   end
