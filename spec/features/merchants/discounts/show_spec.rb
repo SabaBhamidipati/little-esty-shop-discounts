@@ -21,6 +21,16 @@ RSpec.describe 'Bulk Discount Index', type: :feature do
       expect(page).to have_content("Threshold: 10 items")
       expect(page).to_not have_content("Threshold: 15 items")
     end
+  end
 
+  it 'discount has edit link that changes any/all information and updates show page' do
+    visit merchant_bulk_discount_path(@merchant, @discount_20)
+    expect(page).to have_content("Percentage: 20%")
+    expect(page).to have_content("Threshold: 10 items")
+
+    expect(page).to have_link("Edit Details")
+    click_on "Edit Details"
+
+    expect(current_path).to eq(edit_merchant_bulk_discount_path(@merchant, @discount_20))
   end
 end
