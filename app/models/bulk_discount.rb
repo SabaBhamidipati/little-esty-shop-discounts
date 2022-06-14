@@ -6,5 +6,5 @@ class BulkDiscount < ApplicationRecord
 
   validates_presence_of :percentage, :threshold
   validates :percentage, numericality: { in: 1..100 }
-  validates :threshold, numericality: { minimum: 0 }
+  validates :threshold, numericality: { omly_integer: true }
 end
