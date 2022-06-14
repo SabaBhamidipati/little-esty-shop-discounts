@@ -1,0 +1,11 @@
+<h1> <%= @bulk_discount.percentage %> </h1>
+<div id="percentage">
+  <ul>
+    <li><p> Percentage: <%= number_to_percentage(@bulk_discount.percentage, precision: 0) %></p></li>
+  </ul>
+</div>
+<div id="threshold">
+  <ul>
+    <li><p> Threshold: <%= @bulk_discount.threshold %> items</p></li>
+  </ul>
+</div>
