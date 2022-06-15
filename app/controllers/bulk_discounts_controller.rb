@@ -41,6 +41,21 @@ class BulkDiscountsController < ApplicationController
   end
 
   def update
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = BulkDiscount.find(params[:id])
+
+    if params[:percentage].empty? || params[:threshold].empty?
+      flash[:notice] = "Error: Fields cannot be empty"
+      redirect_to edit_merchant_bulk_discount_path(@merchant, @bulk_discount)
+    elsif
+      !percent_valid? || params[:threshold].to_i < 0
+      flash[:notice] = "Error: Please enter positive integer between 1 and 100"
+      redirect_to edit_merchant_bulk_discount_path(@merchant, @bulk_discount)
+    else
+      @bulk_discount.update(discount_params)
+      redirect_to merchant_bulk_discount_path(params[:merchant_id], params[:id])
+    end
+
   end
 
   private
