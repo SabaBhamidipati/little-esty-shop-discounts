@@ -23,6 +23,11 @@
 - Deploy an application to Heroku
 - Develop functional knowledge to troubleshoot Heroku errors
 
+## Testing Coverage
+
+Model Testing: 99.8% (Total Revenue calculation not tested in Discounts proj. as it is already tested in prior project: /models/invoice.rb) 
+Feature Testing: 100%
+
 ## Requirements
 - must use Rails 5.2.x
 - must use PostgreSQL
@@ -34,9 +39,6 @@
 ## Setup
 
 This project uses Ruby 2.7.4 and Rails 5.
-
-Model Testing: 99.8% (Total Revenue calculation not tested in Discounts proj. as it is already tested in prior project: /models/invoice.rb) 
-Feature Testing: 100%
 
 * Fork this repository
 * Clone your fork
