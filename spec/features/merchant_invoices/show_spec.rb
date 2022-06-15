@@ -99,12 +99,25 @@ RSpec.describe 'Merchant Invoice Show page' do
   it 'can display discounted revenue' do
     visit merchant_invoice_path(@merchant, @invoice_7)
 
-    expect(page).to have_content("Discounted Revenue: $15.0")
+    within "#invoice-#{@invoice_7.id}" do
+      expect(page).to have_content("Discounted Revenue: $15.0")
+    end
   end
 
   it 'does not display discounted revenue if no discounts applied' do
     visit merchant_invoice_path(@merchant, @invoice_1)
 
-    expect(page).to_not have_content("Discounted Revenue")
+    within "#invoice-#{@invoice_1.id}" do
+      expect(page).to_not have_content("Discounted Revenue")
+    end
+  end
+
+  it 'can display link to discount page if item is eligible' do
+    visit merchant_invoice_path(@merchant, @invoice_7)
+
+    within "#invoice-items-#{@invoice_item_2.id}" do
+      click_on "Discount: #{@discount_20.id}"
+      expect(current_path).to eq(merchant_bulk_discount_path(@merchant, @discount_20))
+    end
   end
 end
