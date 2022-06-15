@@ -1,6 +1,6 @@
 # Little Esty Shop Discounts
 
-
+<img width="1247" alt="Screen Shot 2022-06-15 at 8 41 30 AM" src="https://user-images.githubusercontent.com/88849965/173834743-d3affab0-e518-4034-9ae2-8d84dde47ff5.png">
 
 ## Background and Description
 
