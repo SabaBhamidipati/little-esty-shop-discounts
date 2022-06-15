@@ -1,6 +1,7 @@
 class BulkDiscountsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
+    @facade = HolidayFacade.new
   end
 
   def show
@@ -55,7 +56,6 @@ class BulkDiscountsController < ApplicationController
       @bulk_discount.update(discount_params)
       redirect_to merchant_bulk_discount_path(params[:merchant_id], params[:id])
     end
-
   end
 
   private

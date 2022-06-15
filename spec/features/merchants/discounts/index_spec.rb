@@ -66,4 +66,20 @@ RSpec.describe 'Bulk Discount Index', type: :feature do
 
     expect(page).to have_content("Percentage: 20%")
   end
+
+  it "should display the next 3 upcoming public holidays" do
+    visit (merchant_bulk_discounts_path(@merchant))
+
+    expect(page).to have_content("Juneteenth")
+    expect(page).to have_content("2022-06-20")
+
+    expect(page).to have_content("Independence Day")
+    expect(page).to have_content("2022-07-04")
+
+    expect(page).to have_content("Labour Day")
+    expect(page).to have_content("2022-09-05")
+
+    expect(page).to_not have_content("Veterans Day")
+    expect(page).to_not have_content("2022-11-11")
+  end
 end
